@@ -31,12 +31,6 @@ MANIFEST
 .env
 FuelConsumptionCo2.csv
 *.csv
-SLR - Simple 2-Point Manual Calculations.html
-SLR - Simple 5-Point Manual Calculations.html
-*.html
-MLR Ultimate Practice Workbook.py
-*.py
-
 
 # PyInstaller
 #   Usually these files are written by a python script from a template
