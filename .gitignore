@@ -26,6 +26,18 @@ share/python-wheels/
 *.egg
 MANIFEST
 
+# add this line to ignore the dataset file
+# create a variable in your .env file to point to the dataset file path instead of hardcoding it
+.env
+FuelConsumptionCo2.csv
+*.csv
+SLR - Simple 2-Point Manual Calculations.html
+SLR - Simple 5-Point Manual Calculations.html
+*.html
+MLR Ultimate Practice Workbook.py
+*.py
+
+
 # PyInstaller
 #   Usually these files are written by a python script from a template
 #   before PyInstaller builds the exe, so as to inject date/other infos into it.
