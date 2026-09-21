@@ -68,9 +68,9 @@ print(df.describe())  # Display basic statistics to understand the data distribu
 # cdf = df[['Column Header/s']]
 
 cdf = df[["ENGINESIZE", "CYLINDERS", "FUELCONSUMPTION_COMB", "CO2EMISSIONS"]]
-print(
-    cdf.sample(5)
-)  # Display a random sample of 5 rows to verify successful extraction
+
+# Display a random sample of 5 rows to verify successful extraction
+print(cdf.sample(5))
 
 # Task 3.2: Visualize Feature Relationships
 
@@ -152,18 +152,16 @@ print(type(X_train), np.shape(X_train), np.shape(y_train))
 # Task 4.2: fit the model to the training data
 
 # Scikit-learn expects 2D arrays.
-# Run this exact code in your terminal or script to trigger a ValueError,
-# then read the traceback to deeply understand the matrix dimension failure.
+# Use the LinearRegression class from scikit-learn to create a linear regression model object.
 
-# use the LinearRegression class from scikit-learn to create a linear regression model object.
-# create a model object
-
+# Create a model object
 regressor = linear_model.LinearRegression()
 
-# train the model on the training data
+# Train the model on the training data
 # X_train is a 1-D array but sklearn models expect a 2D array as input for the training data, with shape (n_observations, n_features).
-# So we need to reshape it. We can let it infer the number of observations using '-1'.
-# use the fit method to train the model on the training data.
+# So we need to reshape it.
+# We can let it infer the number of observations using '-1'.
+# Use the fit method to train the model on the training data.
 
 regressor.fit(X_train.reshape(-1, 1), y_train)
 
@@ -181,6 +179,8 @@ print("Intercept: ", regressor.intercept_)
 # Task 4.4: Intentional Debugging (Shape Mismatch)
 
 # # INTENTIONAL ERROR: Passing 1D array
+# # Run this exact code in your terminal or script to trigger a ValueError,
+# # then read the traceback to deeply understand the matrix dimension failure.
 # regressor.fit(X_train, y_train)
 
 # Task 4.5: The Architectural Fix
@@ -208,13 +208,15 @@ plt.ylabel("Emission")
 # Definition
 # Code Implementation
 
-# Mean Absolute Error (MAE)
+# * Mean Absolute Error (MAE)
 # Average absolute error between predictions and actuals.
 # mean_absolute_error(y_test, y_pred)
-# Mean Squared Error (MSE)
+
+# * Mean Squared Error (MSE)
 # Mean of the squared error (penalizes larger errors heavily).
 # mean_squared_error(y_test, y_pred)
-# R2-Score
+
+# * R2-Score
 # Goodness of fit metric (a perfect model scores 1.0).
 # r2_score(y_test, y_pred)
 
@@ -223,8 +225,7 @@ plt.ylabel("Emission")
 # Evaluation metrics play a key role in the development of a model,
 # as they provide insight into areas that require improvement.
 
-# There are different model evaluation metrics,
-# let's use MSE here to calculate the accuracy of our model based on the test set:
+# There are different model evaluation metrics:
 
 # * Mean Absolute Error: It is the mean of the absolute value of the errors.
 # This is the easiest of the metrics to understand since it’s just an average error.
@@ -252,6 +253,10 @@ print("R2-score: %.2f" % r2_score(y_test, y_pred))
 
 
 # Phase 6: Advanced Implementation (From Scratch)
+
+# I have uploaded two PDF files to the repository for manual calculation using pen and paper.
+# The PDFs contain the mathematical derivation of the slope and intercept for a simple linear regression model.
+# I recommend you read through them and practice on a piece of paper to understand the underlying math before attempting to implement it in Python.
 
 # Task 6.1: Manual Calculation Challenge
 
@@ -349,14 +354,16 @@ print(f"Calculated Intercept (c): {c}")
 # Drop this script into your VS Code workspace and run it.
 
 # 1. We start with a dataset of 10 engine sizes
-X = np.array([1.0, 1.5, 2.0, 2.4, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5])
+X_Example = np.array([1.0, 1.5, 2.0, 2.4, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5])
 
 # 2. We split it properly (8 for training, 2 for testing)
-X_train = np.array([1.0, 1.5, 2.0, 2.4, 3.0, 3.5, 4.0, 4.5])
-X_test = np.array([5.0, 5.5])
+X_train_Example = np.array([1.0, 1.5, 2.0, 2.4, 3.0, 3.5, 4.0, 4.5])
+X_test_Example = np.array([5.0, 5.5])
 
 # 3. The Tripwire (This will pass silently because 8 + 2 = 10)
-assert len(X_train) + len(X_test) == len(X), "Data leakage or loss detected!"
+assert len(X_train_Example) + len(X_test_Example) == len(
+    X_Example
+), "Data leakage or loss detected!"
 print("Pipeline Check 1: Passed. No data lost.")
 
 # 4. INTENTIONAL SABOTAGE
@@ -365,8 +372,8 @@ X_train_corrupted = np.array([1.0, 1.5, 2.0, 2.4, 3.0, 3.5, 4.0])  # Only 7 item
 
 # 5. The Tripwire Triggered
 print("\nRunning Pipeline Check 2...")
-assert len(X_train_corrupted) + len(X_test) == len(
-    X
+assert len(X_train_corrupted) + len(X_test_Example) == len(
+    X_Example
 ), "CRITICAL ERROR: Data leakage or loss detected!"
 
 # When you run this, you will see the first check pass, and the second check immediately trigger an `AssertionError`.
