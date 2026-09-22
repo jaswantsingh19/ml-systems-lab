@@ -29,7 +29,7 @@
 
 # Task 2.1: Library Installation and Import
 
-# pip install numpy pandas scikit-learn matplotlib os dotenv
+# pip install numpy pandas scikit-learn matplotlib python-dotenv
 
 import os
 
@@ -287,14 +287,14 @@ print("Mean of y_array:%.2f" % Mean_y_array)
 # First we minus the mean from each value in the array,
 # then square the result, and finally sum all of those squared differences together to get the variance.
 
-variance_x = sum((X_train - Mean_X_array) ** 2)
+variance_x = np.sum((X_train - Mean_X_array) ** 2)
 
 # Covariance: sum of (x - Mean_X_array) * (y - Mean_y_array)
 # Covariance measures how much two random variables vary together.
 # First we minus the mean from each value in the X and y arrays,
 # then multiply the results together, and finally sum all of those products together to get the covariance
 
-covariance_xy = sum((X_train - Mean_X_array) * (y_train - Mean_y_array))
+covariance_xy = np.sum((X_train - Mean_X_array) * (y_train - Mean_y_array))
 
 # Step 3: Derive slope (m) and intercept (c)
 
